@@ -64,8 +64,12 @@ syn region sassControlLine matchgroup=sassControl start="@\%(if\|else\%(\s\+if\)
 syn keyword sassFor from to through in contained
 
 syn keyword sassTodo        FIXME NOTE TODO OPTIMIZE XXX contained
-syn region  sassComment     start="^\z(\s*\)//"  end="^\%(\z1 \)\@!" contains=sassTodo,@Spell
-syn region  sassCssComment  start="^\z(\s*\)/\*" end="^\%(\z1 \)\@!" contains=sassTodo,@Spell
+"syn region  sassComment     start="^\z(\s*\)//"  end="^\%(\z1 \)\@!" contains=sassTodo,@Spell
+"syn region  sassCssComment  start="^\z(\s*\)/\*" end="^\%(\z1 \)\@!" contains=sassTodo,@Spell
+" Changed the end matcher for css comments. so that it also matches the */ at
+" the end of a line.
+syn region  sassComment     start="^\z(\s*\)//"  end="$" contains=sassTodo,@Spell
+syn region  sassCssComment  start="^\z(\s*\)/\*" end="\%(^\z1\)\?\*/" contains=sassTodo,@Spell
 
 hi def link sassCssComment              sassComment
 hi def link sassComment                 Comment
